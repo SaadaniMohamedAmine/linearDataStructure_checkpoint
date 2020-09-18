@@ -1,0 +1,162 @@
+//first problem with array 
+ALGORITHM sum_diff_element
+VAR
+       set1:ARRAY_OF INTEGER[20];
+       set2:ARRAY_OF INTEGER[20];
+       i,j,k,l:INTEGER;
+       verif:BOOLEAN=true;
+       s:INTEGER=0;
+BEGIN
+FOR i FROM 0 TO set1.length STEP step1  DO
+   write("give set1[i]");
+   read(set1[i]);
+END_FOR
+FOR i FROM 0 TO set2.length STEP step1  DO
+   write("give set2[i]");
+   read(set2[i]);
+END_FOR
+//sum of different element of two sets ,in set1
+FOR i FROM 0 TO set1.length step1  DO
+    verif:=true;
+    FOR j FROM 0 TO set2.length STEP step2  DO
+        IF (set1[i]=set2[j]) THEN
+            verif=false
+        END_IF
+    END_FOR
+    IF (verif=true) THEN
+        s:=s+set1[i];
+    END_IF
+END_FOR
+FOR i FROM 0 TO set2.length step1  DO
+    verif:=true;
+    FOR j FROM 0 TO set2.length STEP step2  DO
+        IF (set2[l]=set1[k]) THEN
+            verif=false
+        END_IF
+    END_FOR
+    IF (verif=true) THEN
+        s:=s+set2[l];
+    END_IF
+END_FOR
+ write("The sum of the different elements is :",s)
+    
+END
+
+//first problem with hash table
+ALGORITHM sum_diff_elements
+VAR
+       set1:ARRAY_OF INTEGER[20];
+       set2:ARRAY_OF INTEGER[20];
+       bigSet:ARRAY_OF INTEGER[40];
+       map:HASH_TABLE<INTEGER,INTEGER>;
+       s,count:INTEGER=0;
+
+BEGIN
+    FOR i FROM 0 TO set1.length STEP step1  DO
+   write("give set1[i]");
+   read(set1[i]);
+END_FOR
+FOR i FROM 0 TO set2.length STEP step1  DO
+   write("give set2[i]");
+   read(set2[i]);
+END_FOR
+ bigSet=set1.concat(set2);
+ FOR i FROM 0 TO bigSet.length STEP step1  DO
+     IF (map.lookup(bigSet[i])=true) THEN 
+     count:=count+1;
+     map.insert(bigSet[i],count+1);
+     ELSE 
+     map.insert(bigSet[i],1) 
+     END_IF
+ END_FOR
+ //iterate hash map to find different items and do the sum of them
+  FOR i FROM 0 TO bigSet.length STEP step1  DO
+      IF (map.get(bigSet[i])=1) THEN
+          s=s+bigSet[i];
+      END_IF
+  END_FOR
+  
+  write("The sum of the different elements is :",s)
+END
+
+//second problem with array
+ALGORITHM sum_same_element
+VAR
+       set1:ARRAY_OF INTEGER[20];
+       set2:ARRAY_OF INTEGER[20];
+       i,j,k,l:INTEGER;
+       verif:BOOLEAN=true;
+       s:INTEGER=0;
+BEGIN
+FOR i FROM 0 TO set1.length STEP step1  DO
+   write("give set1[i]");
+   read(set1[i]);
+END_FOR
+FOR i FROM 0 TO set2.length STEP step1  DO
+   write("give set2[i]");
+   read(set2[i]);
+END_FOR
+//sum of different element of two sets ,in set1
+FOR i FROM 0 TO set1.length step1  DO
+    verif:=true;
+    FOR j FROM 0 TO set2.length STEP step2  DO
+        IF (set1[i]=set2[j]) THEN
+            verif=false
+        END_IF
+    END_FOR
+    IF (verif=false) THEN
+        s:=s+set1[i];
+    END_IF
+END_FOR
+//sum of different element of two sets ,in set2
+FOR i FROM 0 TO set2.length step1  DO
+    verif:=true;
+    FOR j FROM 0 TO set2.length STEP step2  DO
+        IF (set2[l]=set1[k]) THEN
+            verif=false
+        END_IF
+    END_FOR
+    IF (verif=true) THEN
+        s:=s+set2[l];
+    END_IF
+END_FOR
+ write("The sum of the overlapping elements is :",s)
+    
+END
+
+//second problem with hash table
+ALGORITHM sum_diff_elements
+VAR
+       set1:ARRAY_OF INTEGER[20];
+       set2:ARRAY_OF INTEGER[20];
+       bigSet:ARRAY_OF INTEGER[40];
+       map:HASH_TABLE<INTEGER,INTEGER>;
+       s,count:INTEGER=0;
+
+BEGIN
+    FOR i FROM 0 TO set1.length STEP step1  DO
+   write("give set1[i]");
+   read(set1[i]);
+END_FOR
+FOR i FROM 0 TO set2.length STEP step1  DO
+   write("give set2[i]");
+   read(set2[i]);
+END_FOR
+ bigSet=set1.concat(set2);
+ FOR i FROM 0 TO bigSet.length STEP step1  DO
+     IF (map.lookup(bigSet[i])=true) THEN 
+     count:=count+1;
+     map.insert(bigSet[i],count+1);
+     ELSE 
+     map.insert(bigSet[i],1) 
+     END_IF
+ END_FOR
+ //iterate hash map to find different items and do the sum of them
+  FOR i FROM 0 TO bigSet.length STEP step1  DO
+      IF (map.get(bigSet[i])<>1) THEN
+          s=s+(bigSet[i]*map.get(bigSet[i]);
+      END_IF
+  END_FOR
+  
+  write("The sum of the overlapping elements is :",s)
+END
